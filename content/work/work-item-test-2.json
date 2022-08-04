@@ -1,0 +1,11 @@
+{
+  "title": "Test title 2",
+  "slug": "work-item-test-2",
+  "status": "published",
+  "published_at": "2021-01-01T00:00:00Z",
+  "description": ["Test description 2"],
+  "tags": ["test", "test-2"],
+  "feature_image": "https://via.placeholder.com/1200x600",
+  "feature_image_alt": "Test image 1",
+  "link": "https://www.google.com"
+}
