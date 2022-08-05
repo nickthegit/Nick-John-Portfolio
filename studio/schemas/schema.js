@@ -4,6 +4,8 @@ import createSchema from "part:@sanity/base/schema-creator";
 // Then import schema types from any plugins that might expose them
 import schemaTypes from "all:part:@sanity/base/schema-type";
 
+import homePage from "./homePage";
+
 // We import object and document schemas
 import project from "./project";
 import category from "./category";
@@ -17,6 +19,7 @@ export default createSchema({
   // to the ones provided by any plugins that are installed
   types: schemaTypes.concat([
     // The following are document types which will appear
+    homePage,
     // in the studio.
     project,
     category,
