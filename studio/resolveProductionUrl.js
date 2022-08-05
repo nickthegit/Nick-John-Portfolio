@@ -12,8 +12,8 @@ export default function resolveProductionUrl(doc) {
 
   let prepenedSlug = "";
 
-  if (doc._type === "post" && doc?.slug?.current) {
-    prepenedSlug = `work/${doc?.slug?.current}`;
+  if (doc._type === "project" && doc?.slug?.current) {
+    prepenedSlug = `projects/${doc?.slug?.current}`;
   } else if (doc?.slug?.current) {
     prepenedSlug = `${doc?.slug?.current}`;
   } else {

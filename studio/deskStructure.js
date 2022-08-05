@@ -3,19 +3,24 @@ import Iframe from "sanity-plugin-iframe-pane";
 
 import resolveProductionUrl from "./resolveProductionUrl";
 
-export const getDefaultDocumentNode = () => {
-  return S.document().views([
-    S.view.form(),
-    S.view
-      .component(Iframe)
-      .options({
-        url: (doc) => resolveProductionUrl(doc),
-      })
-      .title("Preview"),
-  ]);
+export const getDefaultDocumentNode = ({ schemaType }) => {
+  if (schemaType === "project") {
+    return S.document().views([
+      S.view.form(),
+      S.view
+        .component(Iframe)
+        .options({
+          url: (doc) => resolveProductionUrl(doc),
+        })
+        .title("Preview"),
+    ]);
+  }
 };
 
 export default () =>
   S.list()
     .title("Content")
-    .items([S.documentTypeListItem("post").title("Posts")]);
+    .items([
+      S.documentTypeListItem("project").title("Projects"),
+      S.documentTypeListItem("category").title("Categories"),
+    ]);
