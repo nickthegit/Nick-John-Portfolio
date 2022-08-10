@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
@@ -12,7 +13,10 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1>Hi there nick</h1>
+        <h1>Project</h1>
+        <Link href="/projects/converse-renew-lab-store">
+          <a>converse-renew-lab-store</a>
+        </Link>
       </main>
 
       <footer>

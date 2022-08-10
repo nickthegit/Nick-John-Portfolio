@@ -34,7 +34,12 @@ export default {
     {
       name: "publishedAt",
       title: "Published at",
-      type: "datetime",
+      type: "date",
+    },
+    {
+      name: "link",
+      title: "Link",
+      type: "url",
     },
     {
       name: "body",

@@ -43,7 +43,11 @@ export default function Post({ data, preview }) {
             <div key={category._id}>{category.title}</div>
           ) : null;
         })}
-      <figure>{mainImage && <img src={urlFor(mainImage).url()} />}</figure>
+      <figure>
+        {mainImage && (
+          <img src={urlFor(mainImage).width(1200).auto("format").url()} />
+        )}
+      </figure>
       <PortableText value={body} />
     </article>
   );
