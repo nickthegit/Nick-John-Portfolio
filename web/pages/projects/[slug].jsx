@@ -1,4 +1,4 @@
-import ErrorPage from "next/error";
+// import ErrorPage from "next/error";
 import { useRouter } from "next/router";
 import { groq } from "next-sanity";
 import { PortableText } from "@portabletext/react";
@@ -10,6 +10,8 @@ const projectQuery = groq`
     _id,
     title,
     body,
+    content,
+    credits,
     mainImage,
     categories[]->{
       _id,
@@ -23,9 +25,9 @@ export default function Post({ data, preview }) {
   const router = useRouter();
 
   const { data: project } = usePreviewSubscription(projectQuery, {
-    params: { slug: data.project?.slug },
-    initialData: data.project,
-    enabled: preview && data.project?.slug,
+    params: { slug: data?.project?.slug },
+    initialData: data?.project,
+    enabled: preview && data?.project?.slug,
   });
 
   if (!router.isFallback && !data.project?.slug) {
@@ -73,6 +75,6 @@ export async function getStaticPaths() {
 
   return {
     paths: paths.map((slug) => ({ params: { slug } })),
-    fallback: true,
+    fallback: false,
   };
 }
