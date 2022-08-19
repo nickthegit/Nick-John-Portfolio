@@ -13,7 +13,7 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1>Project</h1>
+        <h1>Projects -</h1>
         <Link href="/projects/converse-renew-lab-store">
           <a>converse-renew-lab-store</a>
         </Link>

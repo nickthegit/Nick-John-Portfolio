@@ -34,7 +34,9 @@ export default function Post({ data, preview }) {
     return <ErrorPage statusCode={404} />;
   }
 
-  const { title, categories, mainImage, body } = project;
+  const { title, categories, mainImage, body, credits, content } = project;
+
+  console.log("PROJECT", project);
 
   return (
     <article>
@@ -51,6 +53,39 @@ export default function Post({ data, preview }) {
         )}
       </figure>
       <PortableText value={body} />
+      <section>
+        <h3>-----Content-----</h3>
+        {content?.length &&
+          content.map((section) => {
+            if (section._type === "video") {
+              return <div key={section._key}>Video: {section.video}</div>;
+            }
+            if (section._type === "images") {
+              return (
+                <div
+                  key={section._key}
+                  style={{ display: "flex", width: "100%" }}
+                >
+                  <h4>image section</h4>
+                  {section.images?.images?.length &&
+                    section.images.images.map((image) => {
+                      return (
+                        <div key={image._key}>
+                          <img
+                            src={urlFor(image).width(1200).auto("format").url()}
+                          />
+                        </div>
+                      );
+                    })}
+                </div>
+              );
+            }
+            return section._type;
+          })}
+        <h3>-----Content End-----</h3>
+      </section>
+      <h3>Credits</h3>
+      <PortableText value={credits} />
     </article>
   );
 }
