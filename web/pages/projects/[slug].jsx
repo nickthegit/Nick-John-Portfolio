@@ -36,8 +36,6 @@ export default function Post({ data, preview }) {
 
   const { title, categories, mainImage, body, credits, content } = project;
 
-  console.log("PROJECT", project);
-
   return (
     <article>
       <h2>{title.length && title}</h2>
