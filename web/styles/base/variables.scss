@@ -5,4 +5,32 @@
   --p-padding: 20px;
 
   --container-size: 1280px;
+  --container-l-size: 1920px;
+
+  --font-size-hero: 18vmin;
+  --font-size-heading-1: 15vmin;
+  --font-size-heading-2: 8vmin;
+  --font-size-p-l: 4.5vmin;
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    --font-size-hero: 13vmin;
+    --font-size-heading-1: 10vmin;
+    --font-size-heading-2: 6vmin;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  :root {
+    --font-size-heading-2: 8vmin;
+    --font-size-p-l: 6vmin;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  :root {
+    --font-size-hero: 15vmin;
+    --font-size-heading-1: 12vmin;
+  }
 }

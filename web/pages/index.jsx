@@ -67,7 +67,7 @@ export default function Home() {
           <h2>Clients</h2>
           <p>{clients.join(", ")}</p>
         </section>
-        <footer>
+        <footer className={styles.contact}>
           <h3>Nick John</h3>
           <a href="mailto:hello@nickjohn.co.uk">hello@nickjohn.co.uk</a>
           <a href="https://github.com/nickthegit">Github</a>
