@@ -1,19 +1,25 @@
-import Link from "next/link";
+import Head from "next/head";
 import "../styles/all.scss";
+import Nav from "../components/Nav";
+import { ThemeStateProvider } from "../context/themeState";
 
-function MyApp({ Component, pageProps }) {
+function Application({ Component, pageProps }) {
   return (
     <>
-      <header>
-        <nav>
-          <Link href="/">
-            <a>Nick John</a>
-          </Link>
-        </nav>
-      </header>
-      <Component {...pageProps} />
+      <Head>
+        <title>Nick John - Portfolio</title>
+        <meta
+          name="description"
+          content="Portfolio for Frontend Web Developer Nick John. LOL"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <ThemeStateProvider>
+        <Nav />
+        <Component {...pageProps} />
+      </ThemeStateProvider>
     </>
   );
 }
 
-export default MyApp;
+export default Application;

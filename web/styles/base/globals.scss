@@ -1,9 +1,25 @@
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
+html {
+  &.light {
+    --foreground: var(--color-black);
+    --background: var(--color-white);
   }
 }
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+.invent {
+  filter: invert(100%);
+}
+
+// @media (prefers-color-scheme: dark) {
+//   html {
+//     color-scheme: dark;
+//   }
+//   body {
+//     color: white;
+//     background: black;
+//   }
+// }

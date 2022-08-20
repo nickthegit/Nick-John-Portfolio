@@ -1,4 +1,10 @@
 :root {
+  --color-white: #fff;
+  --color-black: #000;
+
+  --foreground: var(--color-white);
+  --background: var(--color-black);
+
   --font-main: "CabinetGrotesk-Variable", sans-serif;
   --font-secondary: "Figue", sans-serif;
 

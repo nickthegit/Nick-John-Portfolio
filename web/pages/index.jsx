@@ -3,7 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/pages/Home.module.scss";
 
+import { useThemeStateContext } from "../context/themeState";
+
 export default function Home() {
+  const { theme, setTheme } = useThemeStateContext();
   const clients = [
     "StockX",
     "Nike",
@@ -48,7 +51,9 @@ export default function Home() {
             <article className={styles.projectCard}>
               <Link href="/projects/converse-renew-lab-store">
                 <a>
-                  <h3>Converse Renew Labs Store</h3>
+                  <h3 className={theme.mode === "light" ? "invent" : ""}>
+                    Converse Renew Labs Store
+                  </h3>
                   <img src="https://picsum.photos/1920/1080" alt="" />
                 </a>
               </Link>
@@ -56,7 +61,9 @@ export default function Home() {
             <article className={styles.projectCard}>
               <Link href="/projects/converse-renew-lab-store">
                 <a>
-                  <h3>Converse Renew Labs Store</h3>
+                  <h3 className={theme.mode === "light" ? "invent" : ""}>
+                    Converse Renew Labs Store
+                  </h3>
                   <img src="https://picsum.photos/1920/1080" alt="" />
                 </a>
               </Link>
