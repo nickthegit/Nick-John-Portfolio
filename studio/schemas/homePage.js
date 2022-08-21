@@ -1,16 +1,8 @@
 export default {
   name: "homePage",
-  title: "homePage",
+  title: "Home Page",
   type: "document",
   fields: [
-    {
-      name: "mainImage",
-      title: "Main image",
-      type: "image",
-      options: {
-        hotspot: true,
-      },
-    },
     {
       name: "projects",
       title: "Projects",

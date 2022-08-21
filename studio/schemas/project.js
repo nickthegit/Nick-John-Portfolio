@@ -42,6 +42,12 @@ export default {
       type: "url",
     },
     {
+      name: "featuredVideo",
+      title: "Feature Video",
+      type: "url",
+      description: "if applicable: vimeo link eg: https://vimeo.com/98759847",
+    },
+    {
       name: "body",
       title: "Body",
       type: "blockContent",

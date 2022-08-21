@@ -28,20 +28,6 @@ export default {
         layout: "grid",
       },
     },
-    {
-      name: "display",
-      type: "string",
-      title: "Display as",
-      description: "How should we display these images?",
-      initialValue: "inline",
-      options: {
-        list: [
-          { title: "In-line", value: "inline" },
-          { title: "Carousel", value: "carousel" },
-        ],
-        layout: "radio", // <-- defaults to 'dropdown'
-      },
-    },
   ],
   preview: {
     select: {

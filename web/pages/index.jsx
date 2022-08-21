@@ -5,8 +5,25 @@ import styles from "../styles/pages/Home.module.scss";
 
 import { useThemeStateContext } from "../context/themeState";
 
-export default function Home() {
+import { groq } from "next-sanity";
+import { PortableText } from "@portabletext/react";
+import { usePreviewSubscription, urlFor } from "../lib/sanity";
+import { getClient } from "../lib/sanity.server";
+
+const homeQuery = groq`
+*[_type == "homePage" ][0] {
+  projects[]-> {
+    _id,
+    "slug": slug.current,
+    title,
+    mainImage
+  }
+}
+`;
+
+export default function Home({ data }) {
   const { theme, setTheme } = useThemeStateContext();
+  console.log("data", data);
   const clients = [
     "StockX",
     "Nike",
@@ -48,26 +65,26 @@ export default function Home() {
         <section className={styles.projects}>
           <h2>Projects</h2>
           <div className={styles.grid}>
-            <article className={styles.projectCard}>
-              <Link href="/projects/converse-renew-lab-store">
-                <a>
-                  <h3 className={theme.mode === "light" ? "invent" : ""}>
-                    Converse Renew Labs Store
-                  </h3>
-                  <img src="https://picsum.photos/1920/1080" alt="" />
-                </a>
-              </Link>
-            </article>
-            <article className={styles.projectCard}>
-              <Link href="/projects/converse-renew-lab-store">
-                <a>
-                  <h3 className={theme.mode === "light" ? "invent" : ""}>
-                    Converse Renew Labs Store
-                  </h3>
-                  <img src="https://picsum.photos/1920/1080" alt="" />
-                </a>
-              </Link>
-            </article>
+            {data?.projects?.map((project) => {
+              return (
+                <article className={styles.projectCard} key={project._id}>
+                  <Link href={`/projects/${project.slug}`}>
+                    <a>
+                      <h3 className={theme.mode === "light" ? "invent" : ""}>
+                        {project.title}
+                      </h3>
+                      <img
+                        src={urlFor(project.mainImage)
+                          .width(1920)
+                          .auto("format")
+                          .url()}
+                        alt={`${project.title} - feature image`}
+                      />
+                    </a>
+                  </Link>
+                </article>
+              );
+            })}
           </div>
         </section>
         <section className={styles.clients}>
@@ -83,4 +100,14 @@ export default function Home() {
       </main>
     </div>
   );
+}
+
+export async function getStaticProps({ params, preview = false }) {
+  const homeData = await getClient(preview).fetch(homeQuery);
+
+  return {
+    props: {
+      data: homeData,
+    },
+  };
 }

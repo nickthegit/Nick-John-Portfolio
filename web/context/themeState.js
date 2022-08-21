@@ -16,7 +16,6 @@ export const ThemeStateProvider = ({ children }) => {
       root.classList.remove("dark");
       root.classList.add(theme.mode);
     }
-
     root.classList.add();
   }, [theme.mode]);
 
