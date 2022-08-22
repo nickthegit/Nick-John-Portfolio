@@ -23,7 +23,6 @@ const homeQuery = groq`
 
 export default function Home({ data }) {
   const { theme, setTheme } = useThemeStateContext();
-  console.log("data", data);
   const clients = [
     "StockX",
     "Nike",
