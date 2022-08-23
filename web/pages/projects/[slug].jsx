@@ -42,6 +42,7 @@ export default function Post({ data, preview }) {
   const [nextProject, setNextProject] = useState(null);
   const [prevProject, setPrevProject] = useState(null);
   const [projectList, setProjectList] = useState(null);
+
   const [player, setPlayer] = useState(null);
 
   const router = useRouter();
