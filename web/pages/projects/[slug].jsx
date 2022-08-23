@@ -78,20 +78,23 @@ export default function Post({ data, preview }) {
   useEffect(() => {
     // Client-side-only code
 
-    setPlayer(
-      new Vimeo("featuredVideo", {
-        url: featuredVideo,
-        background: true,
-        byline: false,
-        autoplay: true,
-        loop: true,
-        muted: true,
-        title: false,
-        portrait: false,
-        color: "ffffff",
-        controls: false,
-      })
-    );
+    if (player) {
+      setPlayer(
+        new Vimeo("featuredVideo", {
+          url: featuredVideo,
+          background: true,
+          byline: false,
+          autoplay: true,
+          loop: true,
+          muted: true,
+          title: false,
+          portrait: false,
+          color: "ffffff",
+          controls: false,
+        })
+      );
+    }
+
     const getPrevNextProjects = async () => {
       const getProjectList = await getClient().fetch(allProjectsQuery);
       await setProjectList(getProjectList.projects);
