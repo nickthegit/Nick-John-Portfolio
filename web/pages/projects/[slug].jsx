@@ -127,124 +127,124 @@ export default function Post({ data, preview }) {
           <picture>
             <source
               media="(max-width: 480px)"
-              srcSet={`${urlFor(mainImage)
+              srcSet={`${urlFor(project.mainImage)
                 .width(480)
                 .height(480)
                 .fit("max")
                 .dpr(2)
                 .auto("format")
                 .url()} 2x, 
-              ${urlFor(mainImage)
-                .width(480)
-                .height(480)
-                .fit("max")
-                .auto("format")
-                .url()}`}
+                            ${urlFor(project.mainImage)
+                              .width(480)
+                              .height(480)
+                              .fit("max")
+                              .auto("format")
+                              .url()}`}
             />
             <source
-              media="(min-width: 768px)"
-              srcSet={`${urlFor(mainImage)
+              media="(max-width: 768px)"
+              srcSet={`${urlFor(project.mainImage)
                 .width(768)
-                .height(346)
+                .height(432)
                 .fit("max")
                 .dpr(2)
                 .auto("format")
                 .url()} 2x, 
-              ${urlFor(mainImage)
-                .width(768)
-                .height(346)
-                .fit("max")
-                .auto("format")
-                .url()}`}
+                            ${urlFor(project.mainImage)
+                              .width(768)
+                              .height(432)
+                              .fit("max")
+                              .auto("format")
+                              .url()}`}
             />
             <source
-              media="(min-width: 1024px)"
-              srcSet={`${urlFor(mainImage)
+              media="(max-width: 1024px)"
+              srcSet={`${urlFor(project.mainImage)
                 .width(1024)
-                .height(461)
-                .fit("max")
-                .dpr(2)
-                .auto("format")
-                .url()} 2x, 
-              ${urlFor(mainImage)
-                .width(1024)
-                .height(461)
-                .fit("max")
-                .auto("format")
-                .url()}`}
-            />
-            <source
-              media="(min-width: 1280px)"
-              srcSet={`${urlFor(mainImage)
-                .width(1280)
                 .height(576)
                 .fit("max")
                 .dpr(2)
                 .auto("format")
                 .url()} 2x, 
-              ${urlFor(mainImage)
+                            ${urlFor(project.mainImage)
+                              .width(1024)
+                              .height(576)
+                              .fit("max")
+                              .auto("format")
+                              .url()}`}
+            />
+            <source
+              media="(max-width: 1280px)"
+              srcSet={`${urlFor(project.mainImage)
                 .width(1280)
-                .height(576)
+                .height(720)
                 .fit("max")
+                .dpr(2)
                 .auto("format")
-                .url()}`}
+                .url()} 2x, 
+                            ${urlFor(project.mainImage)
+                              .width(1280)
+                              .height(720)
+                              .fit("max")
+                              .auto("format")
+                              .url()}`}
             />
             <source
-              media="(min-width: 1440px)"
-              srcSet={`${urlFor(mainImage)
+              media="(max-width: 1440px)"
+              srcSet={`${urlFor(project.mainImage)
                 .width(1440)
-                .height(648)
+                .height(810)
                 .fit("max")
                 .dpr(2)
                 .auto("format")
                 .url()} 2x, 
-              ${urlFor(mainImage)
-                .width(1440)
-                .height(648)
-                .fit("max")
-                .auto("format")
-                .url()}`}
+                            ${urlFor(project.mainImage)
+                              .width(1440)
+                              .height(810)
+                              .fit("max")
+                              .auto("format")
+                              .url()}`}
             />
             <source
-              media="(min-width: 1728px)"
-              srcSet={`${urlFor(mainImage)
+              media="(max-width: 1728px)"
+              srcSet={`${urlFor(project.mainImage)
                 .width(1728)
-                .height(778)
+                .height(972)
                 .fit("max")
                 .dpr(2)
                 .auto("format")
                 .url()} 2x, 
-              ${urlFor(mainImage)
-                .width(1728)
-                .height(778)
-                .fit("max")
-                .auto("format")
-                .url()}`}
+                            ${urlFor(project.mainImage)
+                              .width(1728)
+                              .height(972)
+                              .fit("max")
+                              .auto("format")
+                              .url()}`}
             />
             <source
-              media="(min-width: 2048px)"
-              srcSet={`${urlFor(mainImage)
+              media="(min-width: 1729px)"
+              srcSet={`${urlFor(project.mainImage)
                 .width(2048)
-                .height(922)
+                .height(1152)
                 .fit("max")
                 .dpr(2)
                 .auto("format")
                 .url()} 2x, 
-              ${urlFor(mainImage)
-                .width(2048)
-                .height(922)
-                .fit("max")
-                .auto("format")
-                .url()}`}
+                            ${urlFor(project.mainImage)
+                              .width(2048)
+                              .height(1152)
+                              .fit("max")
+                              .auto("format")
+                              .url()}`}
             />
             <img
-              src={urlFor(mainImage)
+              src={urlFor(project.mainImage)
                 .width(1600)
-                .height(720)
+                .height(900)
                 .fit("max")
                 .auto("format")
                 .url()}
-              alt={`${title} - Feature image`}
+              alt={`${project.title} - Feature image`}
             />
           </picture>
         )}
@@ -307,7 +307,7 @@ export default function Post({ data, preview }) {
                         .url()}`}
                   />
                   <source
-                    media="(min-width: 768px)"
+                    media="(max-width: 768px)"
                     srcSet={`${urlFor(image)
                       .width(384)
                       .height(216)
@@ -323,7 +323,7 @@ export default function Post({ data, preview }) {
                         .url()}`}
                   />
                   <source
-                    media="(min-width: 1024px)"
+                    media="(max-width: 1024px)"
                     srcSet={`${urlFor(image)
                       .width(512)
                       .height(288)
@@ -339,7 +339,7 @@ export default function Post({ data, preview }) {
                         .url()}`}
                   />
                   <source
-                    media="(min-width: 1280px)"
+                    media="(max-width: 1280px)"
                     srcSet={`${urlFor(image)
                       .width(640)
                       .height(360)
@@ -355,7 +355,7 @@ export default function Post({ data, preview }) {
                         .url()}`}
                   />
                   <source
-                    media="(min-width: 1440px)"
+                    media="(max-width: 1440px)"
                     srcSet={`${urlFor(image)
                       .width(720)
                       .height(405)
@@ -371,7 +371,7 @@ export default function Post({ data, preview }) {
                         .url()}`}
                   />
                   <source
-                    media="(min-width: 1728px)"
+                    media="(max-width: 1728px)"
                     srcSet={`${urlFor(image)
                       .width(864)
                       .height(486)
@@ -387,7 +387,7 @@ export default function Post({ data, preview }) {
                         .url()}`}
                   />
                   <source
-                    media="(min-width: 2048px)"
+                    media="(min-width: 1729px)"
                     srcSet={`${urlFor(image)
                       .width(1024)
                       .height(576)

@@ -72,13 +72,129 @@ export default function Home({ data }) {
                       <h3 className={theme.mode === "light" ? "invent" : ""}>
                         {project.title}
                       </h3>
-                      <img
-                        src={urlFor(project.mainImage)
-                          .width(1920)
-                          .auto("format")
-                          .url()}
-                        alt={`${project.title} - feature image`}
-                      />
+                      <picture>
+                        <source
+                          media="(max-width: 480px)"
+                          srcSet={`${urlFor(project.mainImage)
+                            .width(480)
+                            .height(480)
+                            .fit("max")
+                            .dpr(2)
+                            .auto("format")
+                            .url()} 2x, 
+                            ${urlFor(project.mainImage)
+                              .width(480)
+                              .height(480)
+                              .fit("max")
+                              .auto("format")
+                              .url()}`}
+                        />
+                        <source
+                          media="(max-width: 768px)"
+                          srcSet={`${urlFor(project.mainImage)
+                            .width(768)
+                            .height(432)
+                            .fit("max")
+                            .dpr(2)
+                            .auto("format")
+                            .url()} 2x, 
+                            ${urlFor(project.mainImage)
+                              .width(768)
+                              .height(432)
+                              .fit("max")
+                              .auto("format")
+                              .url()}`}
+                        />
+                        <source
+                          media="(max-width: 1024px)"
+                          srcSet={`${urlFor(project.mainImage)
+                            .width(1024)
+                            .height(576)
+                            .fit("max")
+                            .dpr(2)
+                            .auto("format")
+                            .url()} 2x, 
+                            ${urlFor(project.mainImage)
+                              .width(1024)
+                              .height(576)
+                              .fit("max")
+                              .auto("format")
+                              .url()}`}
+                        />
+                        <source
+                          media="(max-width: 1280px)"
+                          srcSet={`${urlFor(project.mainImage)
+                            .width(1280)
+                            .height(720)
+                            .fit("max")
+                            .dpr(2)
+                            .auto("format")
+                            .url()} 2x, 
+                            ${urlFor(project.mainImage)
+                              .width(1280)
+                              .height(720)
+                              .fit("max")
+                              .auto("format")
+                              .url()}`}
+                        />
+                        <source
+                          media="(max-width: 1440px)"
+                          srcSet={`${urlFor(project.mainImage)
+                            .width(1440)
+                            .height(810)
+                            .fit("max")
+                            .dpr(2)
+                            .auto("format")
+                            .url()} 2x, 
+                            ${urlFor(project.mainImage)
+                              .width(1440)
+                              .height(810)
+                              .fit("max")
+                              .auto("format")
+                              .url()}`}
+                        />
+                        <source
+                          media="(max-width: 1728px)"
+                          srcSet={`${urlFor(project.mainImage)
+                            .width(1728)
+                            .height(972)
+                            .fit("max")
+                            .dpr(2)
+                            .auto("format")
+                            .url()} 2x, 
+                            ${urlFor(project.mainImage)
+                              .width(1728)
+                              .height(972)
+                              .fit("max")
+                              .auto("format")
+                              .url()}`}
+                        />
+                        <source
+                          media="(min-width: 1729px)"
+                          srcSet={`${urlFor(project.mainImage)
+                            .width(2048)
+                            .height(1152)
+                            .fit("max")
+                            .dpr(2)
+                            .auto("format")
+                            .url()} 2x, 
+                            ${urlFor(project.mainImage)
+                              .width(2048)
+                              .height(1152)
+                              .fit("max")
+                              .auto("format")
+                              .url()}`}
+                        />
+                        <img
+                          src={urlFor(project.mainImage)
+                            .width(1600)
+                            .height(900)
+                            .fit("max")
+                            .auto("format")
+                            .url()}
+                          alt={`${project.title} - Feature image`}
+                        />
+                      </picture>
                     </a>
                   </Link>
                 </article>
