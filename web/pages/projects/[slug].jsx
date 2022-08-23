@@ -1,11 +1,12 @@
 // import ErrorPage from "next/error";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { groq } from "next-sanity";
 import { PortableText } from "@portabletext/react";
 import { usePreviewSubscription, urlFor } from "../../lib/sanity";
 import { getClient } from "../../lib/sanity.server";
 import styles from "../../styles/pages/Project.module.scss";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import Vimeo from "@vimeo/player";
 
@@ -26,8 +27,22 @@ const projectQuery = groq`
     "slug": slug.current
   }
 `;
+const allProjectsQuery = groq`
+*[_type == "homePage" ][0] {
+  projects[]-> {
+    _id,
+    "slug": slug.current,
+    title,
+    mainImage
+  }
+}`;
 
 export default function Post({ data, preview }) {
+  const [nextProject, setNextProject] = useState(null);
+  const [prevProject, setPrevProject] = useState(null);
+  const [projectList, setProjectList] = useState(null);
+  const [loadingProjectList, setLoadingProjectList] = useState(true);
+
   const router = useRouter();
 
   const { data: project } = usePreviewSubscription(projectQuery, {
@@ -39,8 +54,9 @@ export default function Post({ data, preview }) {
   if (!router.isFallback && !data.project?.slug) {
     return <ErrorPage statusCode={404} />;
   }
-  console.log(project);
+
   const {
+    _id,
     title,
     categories,
     mainImage,
@@ -56,6 +72,11 @@ export default function Post({ data, preview }) {
     catArry.push(category.title);
   });
   catArry = catArry.join(" / ");
+
+  const getPrevNextProjects = async () => {
+    const getProjectList = await getClient().fetch(allProjectsQuery);
+    await setProjectList(getProjectList.projects);
+  };
   useEffect(() => {
     // Client-side-only code
     const featuredVideoPlayer = new Vimeo("featuredVideo", {
@@ -70,7 +91,39 @@ export default function Post({ data, preview }) {
       color: "ffffff",
       controls: false,
     });
+    const getPrevNextProjects = async () => {
+      const getProjectList = await getClient().fetch(allProjectsQuery);
+      await setProjectList(getProjectList.projects);
+    };
+
+    console.log("hi");
+    getPrevNextProjects();
+
+    router.events.on("routeChangeComplete", getPrevNextProjects);
+
+    // If the component is unmounted, unsubscribe
+    // from the event with the `off` method:
+    return () => {
+      router.events.off("routeChangeComplete", getPrevNextProjects);
+    };
   }, []);
+  useEffect(() => {
+    if (projectList) {
+      const currentIndex = projectList.findIndex(
+        (project) => project._id === _id
+      );
+      const prev = currentIndex !== 0 ? projectList[currentIndex - 1] : null;
+      const next =
+        currentIndex !== projectList.length
+          ? projectList[currentIndex + 1]
+          : null;
+      setPrevProject(prev);
+      setNextProject(next);
+      // console.log("PL", projectList, _id, currentIndex);
+      console.log("PREV", prevProject?.slug);
+      console.log("NEXT", nextProject?.slug);
+    }
+  }, [projectList]);
 
   return (
     <article className={styles.project}>
@@ -239,13 +292,176 @@ export default function Post({ data, preview }) {
           images.map((image) => {
             return (
               <div key={image._key}>
-                <img src={urlFor(image).width(1200).auto("format").url()} />
+                <picture>
+                  <source
+                    media="(max-width: 480px)"
+                    srcSet={`${urlFor(image)
+                      .width(480)
+                      .height(270)
+                      .fit("max")
+                      .dpr(2)
+                      .auto("format")
+                      .url()} 2x, 
+                      ${urlFor(image)
+                        .width(480)
+                        .height(270)
+                        .fit("max")
+                        .auto("format")
+                        .url()}`}
+                  />
+                  <source
+                    media="(min-width: 768px)"
+                    srcSet={`${urlFor(image)
+                      .width(384)
+                      .height(216)
+                      .fit("max")
+                      .dpr(2)
+                      .auto("format")
+                      .url()} 2x, 
+                      ${urlFor(image)
+                        .width(384)
+                        .height(216)
+                        .fit("max")
+                        .auto("format")
+                        .url()}`}
+                  />
+                  <source
+                    media="(min-width: 1024px)"
+                    srcSet={`${urlFor(image)
+                      .width(512)
+                      .height(288)
+                      .fit("max")
+                      .dpr(2)
+                      .auto("format")
+                      .url()} 2x, 
+                      ${urlFor(image)
+                        .width(512)
+                        .height(288)
+                        .fit("max")
+                        .auto("format")
+                        .url()}`}
+                  />
+                  <source
+                    media="(min-width: 1280px)"
+                    srcSet={`${urlFor(image)
+                      .width(640)
+                      .height(360)
+                      .fit("max")
+                      .dpr(2)
+                      .auto("format")
+                      .url()} 2x, 
+                      ${urlFor(image)
+                        .width(640)
+                        .height(360)
+                        .fit("max")
+                        .auto("format")
+                        .url()}`}
+                  />
+                  <source
+                    media="(min-width: 1440px)"
+                    srcSet={`${urlFor(image)
+                      .width(720)
+                      .height(405)
+                      .fit("max")
+                      .dpr(2)
+                      .auto("format")
+                      .url()} 2x, 
+                      ${urlFor(image)
+                        .width(720)
+                        .height(405)
+                        .fit("max")
+                        .auto("format")
+                        .url()}`}
+                  />
+                  <source
+                    media="(min-width: 1728px)"
+                    srcSet={`${urlFor(image)
+                      .width(864)
+                      .height(486)
+                      .fit("max")
+                      .dpr(2)
+                      .auto("format")
+                      .url()} 2x, 
+                      ${urlFor(image)
+                        .width(864)
+                        .height(486)
+                        .fit("max")
+                        .auto("format")
+                        .url()}`}
+                  />
+                  <source
+                    media="(min-width: 2048px)"
+                    srcSet={`${urlFor(image)
+                      .width(1024)
+                      .height(576)
+                      .fit("max")
+                      .dpr(2)
+                      .auto("format")
+                      .url()} 2x, 
+                      ${urlFor(image)
+                        .width(1024)
+                        .height(576)
+                        .fit("max")
+                        .auto("format")
+                        .url()}`}
+                  />
+                  <img
+                    src={urlFor(image)
+                      .width(800)
+                      .height(450)
+                      .fit("max")
+                      .auto("format")
+                      .url()}
+                    alt={`${title} - image`}
+                  />
+                </picture>
               </div>
             );
           })}
       </section>
-      <h3>Credits</h3>
-      <PortableText value={credits} />
+      <section className={styles.credits}>
+        <PortableText value={credits} />
+      </section>
+      <section className={styles.nextPrev}>
+        {prevProject && (
+          <Link href={`/projects/${prevProject?.slug}`}>
+            <a className={styles.prev}>
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 54 33"
+                >
+                  <path
+                    fill="#fff"
+                    d="m.394 17.615 12.6 14.765a1.885 1.885 0 0 0 2.546.23 1.769 1.769 0 0 0 .24-2.46L5.624 18.238H52.2c.24.007.48-.033.705-.117a1.81 1.81 0 0 0 .602-.373c.173-.162.31-.355.404-.57a1.684 1.684 0 0 0 0-1.353 1.734 1.734 0 0 0-.404-.57 1.806 1.806 0 0 0-.602-.373 1.86 1.86 0 0 0-.705-.117H5.625L15.779 2.852c.602-.703.482-1.861-.24-2.456a1.881 1.881 0 0 0-2.545.23L.394 15.392c-.563.845-.482 1.481 0 2.227v-.004Z"
+                  />
+                </svg>
+              </span>
+              PREVIOUS
+            </a>
+          </Link>
+        )}
+        {nextProject && (
+          <Link href={`/projects/${nextProject?.slug}`}>
+            <a className={styles.next}>
+              NEXT
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 54 33"
+                >
+                  <path
+                    fill="#fff"
+                    d="m.394 17.615 12.6 14.765a1.885 1.885 0 0 0 2.546.23 1.769 1.769 0 0 0 .24-2.46L5.624 18.238H52.2c.24.007.48-.033.705-.117a1.81 1.81 0 0 0 .602-.373c.173-.162.31-.355.404-.57a1.684 1.684 0 0 0 0-1.353 1.734 1.734 0 0 0-.404-.57 1.806 1.806 0 0 0-.602-.373 1.86 1.86 0 0 0-.705-.117H5.625L15.779 2.852c.602-.703.482-1.861-.24-2.456a1.881 1.881 0 0 0-2.545.23L.394 15.392c-.563.845-.482 1.481 0 2.227v-.004Z"
+                  />
+                </svg>
+              </span>
+            </a>
+          </Link>
+        )}
+      </section>
     </article>
   );
 }
