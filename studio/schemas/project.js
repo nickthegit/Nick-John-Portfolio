@@ -53,30 +53,9 @@ export default {
       type: "blockContent",
     },
     {
-      name: "content",
-      title: "Content",
-      type: "array",
-      of: [
-        {
-          type: "object",
-          name: "video",
-          title: "Video",
-          fields: [
-            {
-              name: "video",
-              title: "Video",
-              type: "url",
-              description: "vimeo link eg: https://vimeo.com/98759847",
-            },
-          ],
-        },
-        {
-          type: "object",
-          name: "images",
-          title: "Image(s)",
-          fields: [{ name: "images", title: "Image(s)", type: "gallery" }],
-        },
-      ],
+      name: "images",
+      title: "Image(s)",
+      type: "gallery",
     },
     {
       name: "credits",

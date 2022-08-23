@@ -5,15 +5,19 @@ import { PortableText } from "@portabletext/react";
 import { usePreviewSubscription, urlFor } from "../../lib/sanity";
 import { getClient } from "../../lib/sanity.server";
 import styles from "../../styles/pages/Project.module.scss";
+import { useEffect } from "react";
+
+import Vimeo from "@vimeo/player";
 
 const projectQuery = groq`
   *[_type == "project" && slug.current == $slug][0] {
     _id,
     title,
     body,
-    content,
+    "images": images.images,
     credits,
     link,
+    featuredVideo,
     mainImage,
     categories[]->{
       _id,
@@ -43,7 +47,8 @@ export default function Post({ data, preview }) {
     body,
     credits,
     link,
-    content,
+    images,
+    featuredVideo,
   } = project;
 
   let catArry = [];
@@ -51,6 +56,21 @@ export default function Post({ data, preview }) {
     catArry.push(category.title);
   });
   catArry = catArry.join(" / ");
+  useEffect(() => {
+    // Client-side-only code
+    const featuredVideoPlayer = new Vimeo("featuredVideo", {
+      url: featuredVideo,
+      background: true,
+      byline: false,
+      autoplay: true,
+      loop: true,
+      muted: true,
+      title: false,
+      portrait: false,
+      color: "ffffff",
+      controls: false,
+    });
+  }, []);
 
   return (
     <article className={styles.project}>
@@ -204,39 +224,26 @@ export default function Post({ data, preview }) {
           </a>
         </section>
       )}
-
-      <PortableText value={body} />
-      {/* <section>
-        <h3>-----Content-----</h3>
-        {content?.length &&
-          content.map((section) => {
-            if (section._type === "video") {
-              return <div key={section._key}>Video: {section.video}</div>;
-            }
-            if (section._type === "images") {
-              return (
-                <div
-                  key={section._key}
-                  style={{ display: "flex", width: "100%" }}
-                >
-                  <h4>image section</h4>
-                  {section.images?.images?.length &&
-                    section.images.images.map((image) => {
-                      return (
-                        <div key={image._key}>
-                          <img
-                            src={urlFor(image).width(1200).auto("format").url()}
-                          />
-                        </div>
-                      );
-                    })}
-                </div>
-              );
-            }
-            return section._type;
+      {featuredVideo?.length && (
+        <section className={styles.featuredVideo}>
+          <div id="featuredVideo" className={styles.videoWrapper}></div>
+        </section>
+      )}
+      {body?.length && (
+        <section className={styles.body}>
+          <PortableText value={body} />
+        </section>
+      )}
+      <section className={styles.images}>
+        {images?.length &&
+          images.map((image) => {
+            return (
+              <div key={image._key}>
+                <img src={urlFor(image).width(1200).auto("format").url()} />
+              </div>
+            );
           })}
-        <h3>-----Content End-----</h3>
-      </section> */}
+      </section>
       <h3>Credits</h3>
       <PortableText value={credits} />
     </article>
