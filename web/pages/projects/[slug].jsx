@@ -41,7 +41,6 @@ export default function Post({ data, preview }) {
   const [nextProject, setNextProject] = useState(null);
   const [prevProject, setPrevProject] = useState(null);
   const [projectList, setProjectList] = useState(null);
-  const [loadingProjectList, setLoadingProjectList] = useState(true);
 
   const router = useRouter();
 
@@ -96,7 +95,6 @@ export default function Post({ data, preview }) {
       await setProjectList(getProjectList.projects);
     };
 
-    console.log("hi");
     getPrevNextProjects();
 
     router.events.on("routeChangeComplete", getPrevNextProjects);
@@ -119,9 +117,6 @@ export default function Post({ data, preview }) {
           : null;
       setPrevProject(prev);
       setNextProject(next);
-      // console.log("PL", projectList, _id, currentIndex);
-      console.log("PREV", prevProject?.slug);
-      console.log("NEXT", nextProject?.slug);
     }
   }, [projectList]);
 
