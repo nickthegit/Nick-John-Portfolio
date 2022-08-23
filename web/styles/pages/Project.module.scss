@@ -115,7 +115,7 @@
 
 .images {
   width: 100%;
-  max-width: var(--container-l-size-size);
+  max-width: var(--container-l-size);
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -147,7 +147,7 @@
 
 .nextPrev {
   width: 100%;
-  max-width: var(--container-l-size-size);
+  max-width: var(--container-l-size);
   margin: 0 auto;
   position: relative;
   margin-top: calc(var(--p-padding) * 3);
