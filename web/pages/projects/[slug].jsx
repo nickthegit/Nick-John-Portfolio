@@ -274,7 +274,9 @@ export default function Post({ data, preview }) {
       )}
       {featuredVideo?.length && (
         <section className={styles.featuredVideo}>
-          <div id="featuredVideo" className={styles.videoWrapper}></div>
+          <div className={styles.videoWrap}>
+            <div id="featuredVideo" className={styles.video}></div>
+          </div>
         </section>
       )}
       {body?.length && (
