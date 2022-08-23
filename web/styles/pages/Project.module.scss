@@ -80,6 +80,8 @@
 
 .featuredVideo {
   width: 100%;
+  max-width: var(--container-l-size);
+  margin: 0 auto;
   height: 0;
   padding-bottom: (9 / 16) * 100%;
   position: relative;
