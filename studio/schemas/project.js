@@ -9,12 +9,20 @@ export default {
       type: "string",
     },
     {
+      name: "client",
+      title: "Client",
+      type: "string",
+    },
+    {
       name: "slug",
       title: "Slug",
       type: "slug",
+      // options: {
+      //   source: "title",
+      //   maxLength: 96,
+      // },
       options: {
-        source: "title",
-        maxLength: 96,
+        source: (doc) => `${doc.client}-${doc.title}`,
       },
     },
     {

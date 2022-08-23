@@ -13,7 +13,7 @@ export default function Nav() {
       >
         <nav>
           <Link href="/">
-            <a>Nick John</a>
+            <a>Nick John - wip</a>
           </Link>
           <a href="#">Work</a>
           <a href="#">Contact</a>

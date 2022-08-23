@@ -3,7 +3,7 @@ const ThemeStateContext = createContext();
 
 export const ThemeStateProvider = ({ children }) => {
   const initialState = {
-    mode: "dark",
+    mode: "light",
   };
   const [theme, setTheme] = useState(initialState);
 

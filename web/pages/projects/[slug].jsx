@@ -24,7 +24,8 @@ const projectQuery = groq`
       _id,
       title
     },
-    "slug": slug.current
+    "slug": slug.current,
+    client
   }
 `;
 const allProjectsQuery = groq`
@@ -41,6 +42,7 @@ export default function Post({ data, preview }) {
   const [nextProject, setNextProject] = useState(null);
   const [prevProject, setPrevProject] = useState(null);
   const [projectList, setProjectList] = useState(null);
+  const [player, setPlayer] = useState(null);
 
   const router = useRouter();
 
@@ -64,6 +66,7 @@ export default function Post({ data, preview }) {
     link,
     images,
     featuredVideo,
+    client,
   } = project;
 
   let catArry = [];
@@ -72,37 +75,39 @@ export default function Post({ data, preview }) {
   });
   catArry = catArry.join(" / ");
 
-  const getPrevNextProjects = async () => {
-    const getProjectList = await getClient().fetch(allProjectsQuery);
-    await setProjectList(getProjectList.projects);
-  };
   useEffect(() => {
     // Client-side-only code
-    const featuredVideoPlayer = new Vimeo("featuredVideo", {
-      url: featuredVideo,
-      background: true,
-      byline: false,
-      autoplay: true,
-      loop: true,
-      muted: true,
-      title: false,
-      portrait: false,
-      color: "ffffff",
-      controls: false,
-    });
+
+    setPlayer(
+      new Vimeo("featuredVideo", {
+        url: featuredVideo,
+        background: true,
+        byline: false,
+        autoplay: true,
+        loop: true,
+        muted: true,
+        title: false,
+        portrait: false,
+        color: "ffffff",
+        controls: false,
+      })
+    );
     const getPrevNextProjects = async () => {
       const getProjectList = await getClient().fetch(allProjectsQuery);
       await setProjectList(getProjectList.projects);
     };
+    const changeRoute = () => {
+      getPrevNextProjects();
+    };
 
     getPrevNextProjects();
 
-    router.events.on("routeChangeComplete", getPrevNextProjects);
+    router.events.on("routeChangeComplete", changeRoute);
 
     // If the component is unmounted, unsubscribe
     // from the event with the `off` method:
     return () => {
-      router.events.off("routeChangeComplete", getPrevNextProjects);
+      router.events.off("routeChangeComplete", changeRoute);
     };
   }, []);
   useEffect(() => {
@@ -119,6 +124,9 @@ export default function Post({ data, preview }) {
       setNextProject(next);
     }
   }, [projectList]);
+  useEffect(() => {
+    player?.loadVideo(featuredVideo);
+  }, [project]);
 
   return (
     <article className={styles.project}>
@@ -249,7 +257,10 @@ export default function Post({ data, preview }) {
           </picture>
         )}
       </figure>
-      <h1 className={styles.title}>{title.length && title}</h1>
+      <h1 className={styles.title}>
+        {client?.length && client} <br />
+        {title?.length && title}
+      </h1>
       {categories?.length && (
         <p className={styles.categories}>{catArry.length && catArry}</p>
       )}

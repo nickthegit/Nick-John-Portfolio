@@ -16,7 +16,8 @@ const homeQuery = groq`
     _id,
     "slug": slug.current,
     title,
-    mainImage
+    mainImage,
+    client
   }
 }
 `;
@@ -70,6 +71,7 @@ export default function Home({ data }) {
                   <Link href={`/projects/${project.slug}`}>
                     <a>
                       <h3 className={theme.mode === "light" ? "invent" : ""}>
+                        {project.client} <br />
                         {project.title}
                       </h3>
                       <picture>
