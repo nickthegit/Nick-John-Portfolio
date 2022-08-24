@@ -15,8 +15,12 @@ export default function Nav() {
           <Link href="/">
             <a>Nick John - wip</a>
           </Link>
-          <a href="#">Work</a>
-          <a href="#">Contact</a>
+          <a className={styles.navItem} href="#">
+            Work
+          </a>
+          <a className={styles.navItem} href="#">
+            Contact
+          </a>
           <button
             onClick={() => {
               if (theme.mode === "dark") {
