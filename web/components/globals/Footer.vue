@@ -1,29 +1,28 @@
 <template>
   <footer>
-    <LayoutWrapper class="footer-wrapper">
-      <section class="footer-socials">
-        <!-- linkedin — github — email -->
-        <a
-          href="https://www.linkedin.com/in/nickjohn-dev/"
-          target="_blank"
-          rel="noopener noreferrer"
-          >linkedin</a
-        >
-        <a
-          href="https://github.com/nickthegit"
-          target="_blank"
-          rel="noopener noreferrer"
-          >github</a
-        >
-        <a
-          href="mailto:nickjohnmail@gmail.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          >email</a
-        >
-      </section>
-      <section class="footer-bottom-bar">© Nick John {{ currentYear }}</section>
-    </LayoutWrapper>
+    <section class="footer-socials wrapper">
+      <a
+        href="https://www.linkedin.com/in/nickjohn-dev/"
+        target="_blank"
+        rel="noopener noreferrer"
+        >linkedin</a
+      >
+      <a
+        href="https://github.com/nickthegit"
+        target="_blank"
+        rel="noopener noreferrer"
+        >github</a
+      >
+      <a
+        href="mailto:nickjohnmail@gmail.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        >email</a
+      >
+    </section>
+    <section class="footer-bottom-bar wrapper">
+      © Nick John {{ currentYear }}
+    </section>
   </footer>
 </template>
 

@@ -1,3 +1,27 @@
+html {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+.wrapper-full,
+.wrapper {
+  width: 100%;
+  padding-left: var(--spacing);
+  padding-right: var(--spacing);
+}
+
+.wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 1fr;
+  align-items: center;
+}
+
 .headroom {
   will-change: transform;
   transition: transform 200ms linear;

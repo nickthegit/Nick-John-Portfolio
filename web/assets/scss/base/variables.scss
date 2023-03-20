@@ -1,0 +1,17 @@
+:root {
+  --color-primary: #000;
+  --color-secondary: #fff;
+  --color-foreground: #000;
+  --color-background: #fff;
+  --spacing: 40px;
+}
+@media screen and (max-width: 768px) {
+  :root {
+    --spacing: 20px;
+  }
+}
+@media screen and (max-width: 480px) {
+  :root {
+    --spacing: 20px;
+  }
+}

@@ -4,8 +4,10 @@
   </div>
 </template>
 
-<script>
-export default {};
+<script setup>
+definePageMeta({
+  layout: "about",
+});
 </script>
 
 <style></style>

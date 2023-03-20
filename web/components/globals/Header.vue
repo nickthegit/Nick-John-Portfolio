@@ -1,6 +1,6 @@
 <template>
   <header ref="el">
-    <LayoutWrapperFull class="header-wrapper">
+    <div class="header-wrapper wrapper">
       <NuxtLink class="brand" to="/">
         <h1>Nick John</h1>
         <h2>Frontend Developer</h2>
@@ -11,7 +11,7 @@
           <li><NuxtLink to="/about">About</NuxtLink></li>
         </ul>
       </nav>
-    </LayoutWrapperFull>
+    </div>
   </header>
 </template>
 
@@ -36,6 +36,7 @@ header {
   padding-top: 40px;
   padding-bottom: 40px;
   position: fixed;
+  z-index: 999;
   @media screen and (max-width: 768px) {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -65,8 +66,14 @@ nav {
     }
   }
   a {
+    opacity: 0.5;
     &.router-link-active {
       text-decoration: underline;
+      text-underline-offset: 10px;
+      opacity: 1;
+    }
+    &:hover {
+      opacity: 1;
     }
   }
 }
