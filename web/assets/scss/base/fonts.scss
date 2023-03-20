@@ -1,0 +1,22 @@
+@font-face {
+  font-family: "CabinetGrotesk-Variable";
+  src: url("~/assets/fonts/Cabinet Grotesk/Fonts/WEB/fonts/CabinetGrotesk-Variable.woff2")
+      format("woff2"),
+    url("~/assets/fonts/Cabinet Grotesk/Fonts/WEB/fonts/CabinetGrotesk-Variable.woff")
+      format("woff"),
+    url("~/assets/fonts/Cabinet Grotesk/Fonts/WEB/fonts/CabinetGrotesk-Variable.ttf")
+      format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Figue";
+  src: url("~/assets/fonts/Figue/Figue-Regular.woff2") format("woff2"),
+    url("~/assets/fonts/Figue/Figue-Regular.woff") format("woff"),
+    url("~/assets/fonts/Figue/Figue-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
