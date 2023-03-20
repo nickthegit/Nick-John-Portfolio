@@ -19,7 +19,6 @@
 import Headroom from "headroom.js";
 const el = ref(null);
 onMounted(() => {
-  console.log(`the component is now mounted.`, el.value);
   var headroom = new Headroom(el.value, {
     offset: {
       down: 150,
