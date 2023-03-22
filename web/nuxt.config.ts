@@ -14,4 +14,10 @@ export default defineNuxtConfig({
       "postcss-responsive-type": {},
     },
   },
+  modules: ["@nuxtjs/sanity"],
+  sanity: {
+    projectId: "bra9n7be",
+    dataset: "production",
+    apiVersion: "2022-03-22",
+  },
 });

@@ -1,15 +1,20 @@
 <template>
   <article class="wrapper grid-12">
-    <img :src="imgSrc" />
+    <!-- <div class="dummy-img" ref="dummyImg"></div> -->
+    <div class="img-wrapper" ref="imgWrapper">
+      <img :src="imgSrc" />
+    </div>
     <div class="info">
-      <hgroup>
+      <hgroup :class="showInfo ? 'showInfo' : ''">
         <h2>{{ client }}</h2>
         <h1>{{ title }}</h1>
       </hgroup>
-      <section>
-        <div v-if="tags.length" class="tags">tag1 tag2 tag3</div>
-        <div v-if="siteLink.length">Site Link</div>
-      </section>
+      <Transition name="fade">
+        <section v-show="showInfo">
+          <div v-if="tags.length" class="tags">{{ tags }}</div>
+          <div v-if="siteLink.length">{{ siteLink }}</div>
+        </section>
+      </Transition>
     </div>
   </article>
 </template>
@@ -26,33 +31,72 @@ const props = defineProps({
   },
   siteLink: { type: String, default: "" },
 });
-onMounted(() => {
-  console.log(`the component is now mounted.`, props.siteLink.length);
+
+const showInfo = computed(() => {
+  return props.tags.length > 0 || props.siteLink.length > 0 ? true : false;
+});
+
+const dummyImg = ref(null);
+const imgWrapper = ref(null);
+let shortWidth = ref(0);
+let longWidth = ref("100%");
+
+// onMounted(() => {});
+nextTick(() => {
+  // shortWidth = dummyImg.value.clientWidth;
+  // longWidth = imgWrapper.value.clientWidth;
+  // console.log(shortWidth, longWidth);
+  // dummyImg.value.style.width = `${imgWrapper.value.clientWidth}px`;
 });
 </script>
 
 <style lang="scss" scoped>
-img {
-  width: 100%;
+.dummy-img {
+  grid-column: 6 / 13;
+  grid-row: 1 / 1;
+  z-index: 2;
+  position: relative;
+  background: rebeccapurple;
+}
+.img-wrapper {
   grid-column: 4 / 13;
   grid-row: 1 / 1;
   z-index: 1;
   position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+  height: 0;
+  padding-bottom: calc((9 / 16) * 100%);
+}
+img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
 }
 .info {
   grid-column: 1 / 6;
   grid-row: 1 / 1;
   z-index: 2;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 30px;
 }
 hgroup {
   text-transform: uppercase;
   display: flex;
   flex-direction: column;
   gap: 15px;
+  align-self: end;
+  transform: translateY(50%);
+  transition: transform 0.3s ease-in-out;
+  &.showInfo {
+    transform: translateY(0);
+  }
   h1 {
     font-family: "Figue";
     font-size: responsive 24px 68px;
@@ -68,6 +112,6 @@ section {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin-top: 30px;
+  align-self: start;
 }
 </style>

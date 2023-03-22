@@ -4,14 +4,17 @@
   --color-foreground: #000;
   --color-background: #fff;
   --spacing: 40px;
+  --content-spacing: 80px;
 }
 @media screen and (max-width: 768px) {
   :root {
     --spacing: 20px;
+    --content-spacing: 60px;
   }
 }
 @media screen and (max-width: 480px) {
   :root {
     --spacing: 20px;
+    --content-spacing: 40px;
   }
 }
