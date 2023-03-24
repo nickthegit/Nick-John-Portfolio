@@ -29,7 +29,7 @@
       <h2>Clients</h2>
       <p class="first">
         I've been lucky to work with some great brands over the years, some
-        highlighs are:
+        highlighs are:-
       </p>
       <ul>
         <li v-for="client in clients" :key="client.key">
