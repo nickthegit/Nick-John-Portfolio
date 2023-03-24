@@ -2,11 +2,12 @@
   <article>
     <WorkItemCard
       :title="title"
-      :img-src="$urlFor(mainImage).width(1426).url()"
+      :img-src="mainImage"
       :client="client"
       :slug="slug"
       :tags="categories"
       :site-link="link ? link : ''"
+      :isHero="hero"
     />
     <!-- intro -->
     <section v-if="body" class="text-container intro wrapper grid-12">
@@ -17,7 +18,6 @@
       <div class="video">
         <video
           :src="video"
-          controls
           muted
           loop
           autoplay
@@ -28,12 +28,22 @@
       </div>
     </section>
     <!-- images -->
-    <section v-if="images" class="media-container img-2 wrapper grid-12">
-      <img
+    <section
+      v-if="images"
+      class="media-container img-container wrapper grid-12"
+    >
+      <GeneralImage
+        v-for="image in images"
+        :key="image._key"
+        :img="image"
+        :alt-text="`${title} - images`"
+        class="img"
+      />
+      <!-- <img
         v-for="image in images"
         :key="image._key"
         :src="$urlFor(image).width(800).url()"
-      />
+      /> -->
     </section>
 
     <!-- credits -->
@@ -86,7 +96,11 @@ const {
   video,
 } = data.value;
 
-// console.log("YOYOYOYO", images);
+// fire isHero
+const hero = ref(false);
+setTimeout(() => {
+  hero.value = true;
+}, 200);
 </script>
 
 <style lang="scss">
@@ -126,11 +140,14 @@ const {
     position: relative;
     height: 0;
     overflow: hidden;
-    padding-bottom: 56.25%;
     grid-column: 1 / span 12;
     background: black;
+    padding-bottom: calc((9 / 16) * 100%);
     @media screen and (max-width: 768px) {
       grid-column: 1 / span 12;
+    }
+    @media screen and (max-width: 480px) {
+      padding-bottom: calc((1 / 1) * 100%);
     }
   }
   img,
@@ -145,22 +162,9 @@ const {
   }
 }
 
-.img-1 {
-  img {
-    grid-column: span 12;
-  }
-}
-.img-2 {
-  img {
+.img-container {
+  .img {
     grid-column: span 6;
-    @media screen and (max-width: 480px) {
-      grid-column: 1 / span 12;
-    }
-  }
-}
-.img-3 {
-  img {
-    grid-column: span 4;
     @media screen and (max-width: 480px) {
       grid-column: 1 / span 12;
     }
@@ -191,7 +195,7 @@ const {
       grid-column: span 4;
     }
     div {
-      grid-column: span 8;
+      grid-column: span 12;
     }
   }
 }

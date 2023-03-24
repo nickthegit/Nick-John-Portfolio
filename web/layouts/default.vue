@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="layout-default-wrapper">
     <slot />
   </div>
 </template>
 
 <style lang="scss" scoped>
-div {
+.layout-default-wrapper {
   padding-top: var(--card-spacing);
   min-height: 60vh;
 }

@@ -6,9 +6,10 @@
           <NuxtLink :to="`/work/${project.slug}`">
             <WorkItemCard
               :title="project.title"
-              :img-src="$urlFor(project.mainImage).width(1426).url()"
+              :img-src="project.mainImage"
               :client="project.client"
               :slug="project.slug"
+              :isHero="false"
             />
           </NuxtLink>
         </li>
