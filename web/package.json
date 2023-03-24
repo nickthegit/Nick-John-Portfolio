@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@nuxtjs/sanity": "^1.6.0",
+    "@sanity/image-url": "^1.0.2",
     "headroom.js": "^0.12.0",
     "postcss-responsive-type": "^1.0.0",
     "sass": "^1.59.3"

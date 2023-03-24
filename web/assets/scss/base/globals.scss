@@ -20,6 +20,31 @@ html {
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 1fr;
 }
+.wysiwyg {
+  font-size: responsive 16px 20px;
+  p,
+  ul,
+  ol {
+    margin-bottom: 20px;
+  }
+  strong {
+    font-weight: 600;
+    font-variation-settings: "wght" 600;
+  }
+  a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    &:hover {
+      color: var(--color-primary);
+      text-decoration-color: var(--color-primary);
+    }
+  }
+  ul {
+  }
+  li {
+    margin-bottom: 10px;
+  }
+}
 
 .headroom {
   will-change: transform;

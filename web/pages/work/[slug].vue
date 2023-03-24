@@ -1,48 +1,51 @@
 <template>
   <article>
     <WorkItemCard
-      title="Renew Labs Store"
-      img-src="https://via.placeholder.com/600x400/f27272/969696"
-      client="Converse"
-      slug="renew-labs-store"
-      :tags="['hi', 'there']"
-      site-link="https://www.google.com"
+      :title="title"
+      :img-src="test"
+      :client="client"
+      :slug="slug"
+      :tags="categories"
+      :site-link="link"
     />
-    <section class="text-container intro wrapper grid-12">
-      <p>
-        I Led Development team for build of Renew Labs Store by Converse. By
-        using 360 rendered imagery we created a fullY immersive “Trash Island”
-        online to Experience, shop and rise awareness for the ocean crisis.
-      </p>
-      <p>
-        Many factors went into the build including data collection(Using
-        Sendgrid API), 360 Viewing capabilities(built on top of Marzipano.js)
-        and SSG Utilizaling Nuxt.js framework and utilising Netlify Functions
-      </p>
+    <!-- intro -->
+    <section v-if="body" class="text-container intro wrapper grid-12">
+      <SanityContent :blocks="body" />
     </section>
+    <!-- video -->
+    <section v-if="video" class="media-container video-wrapper wrapper grid-12">
+      <div class="video">
+        <video
+          :src="`https://res.cloudinary.com/dxyssyktz/video/upload/f_auto,q_auto:good/v1679586126/nj-portfolio/${video}.mp4`"
+          controls
+          muted
+          loop
+          autoplay
+          playsinline
+          anonymous
+          crossorigin
+        ></video>
+      </div>
+    </section>
+    <section class="media-container img-2 wrapper grid-12">
+      <img
+        :src="`https://res.cloudinary.com/dxyssyktz/video/upload/f_auto,q_auto:good/v1679586126/nj-portfolio/${video}.jpg`"
+      />
+    </section>
+    <!-- images -->
     <section class="media-container img-2 wrapper grid-12">
       <img src="https://via.placeholder.com/600x400" />
       <img src="https://via.placeholder.com/400x300" />
+      <img src="https://via.placeholder.com/400x300" />
+      <img src="https://via.placeholder.com/400x300" />
     </section>
-    <section class="media-container video wrapper grid-12">
-      <img src="https://via.placeholder.com/600x400/e0c5c5/969696?text=VIDEO" />
-    </section>
-    <section class="media-container img-3 wrapper grid-12">
-      <img src="https://via.placeholder.com/600x400" />
-      <img src="https://via.placeholder.com/600x600" />
-      <img src="https://via.placeholder.com/600x400" />
-    </section>
-    <section class="media-container img-1 wrapper grid-12">
-      <img src="https://via.placeholder.com/600x400" />
-    </section>
+
+    <!-- credits -->
     <cite class="text-container credits wrapper grid-12">
-      <h3>Credits</h3>
-      <ul>
-        <li>Client: Converse</li>
-        <li>Role: Lead Developer</li>
-        <li>Agency: Renew Labs</li>
-        <li>Year: 2020</li>
-      </ul>
+      <h3>CREDITS:</h3>
+      <div class="wysiwyg">
+        <SanityContent :blocks="credits" />
+      </div>
     </cite>
   </article>
 </template>
@@ -50,33 +53,61 @@
 <script setup>
 // get slug from route in nuxt 3
 const { params } = useRoute();
-const slug = computed(() => params.slug);
 
-const query = `
-  *[_type == "project" && slug.current == '${params.slug}'][0] {
+const query = groq`
+*[_type == "project" && slug.current == 'converse-renew-labs-store'][0] {
     _id,
-    title,
-    body,
-    "images": images.images,
-    credits,
-    link,
-    featuredVideo,
-    mainImage,
-    categories[]->{
+    "title": coalesce(title, false),
+    "body": coalesce(body, false),
+    "images": coalesce(images.images, false),
+    "credits": coalesce(credits, false),
+    "link": coalesce(link, false),
+    "featuredVideo": coalesce(featuredVideo, false), 
+    "video": coalesce(video, false),
+    "mainImage": coalesce(mainImage, false),
+    "categories": coalesce(categories[]->{
       _id,
       title
-    },
-    "slug": slug.current,
-    client
-  }
+    }, false),
+    "slug": coalesce(slug.current, false),
+    "client": coalesce(client, false),
+}
 `;
-const sanity = useSanity();
-const data = await useAsyncData("project", () => sanity.fetch(query));
 
-console.log("data", data.data);
+console.log("query", query);
+
+const { data, refresh } = await useSanityQuery(query, {
+  params: {
+    slug: params.slug,
+  },
+});
+
+const slugData = data.value;
+const {
+  title,
+  body,
+  images,
+  credits,
+  link,
+  featuredVideo,
+  mainImage,
+  categories,
+  slug,
+  client,
+  video,
+} = data.value;
+
+console.log("YOYOYOYO", video);
+
+console.log("data", slugData.title);
+
+const { $urlFor } = useNuxtApp();
+
+const test = $urlFor(slugData.mainImage).width(1426).url();
+console.log("test", test);
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .text-container {
   margin: var(--content-spacing) auto;
   p,
@@ -108,11 +139,27 @@ console.log("data", data.data);
     }
   }
 }
-.video {
+.video-wrapper {
+  .video {
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    grid-column: 5 / span 8;
+    background: black;
+    @media screen and (max-width: 768px) {
+      grid-column: 1 / span 12;
+    }
+  }
   img,
   iframe,
   video {
-    grid-column: 5 / span 8;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
   }
 }
 
@@ -124,17 +171,46 @@ console.log("data", data.data);
 .img-2 {
   img {
     grid-column: span 6;
+    @media screen and (max-width: 480px) {
+      grid-column: 1 / span 12;
+    }
   }
 }
 .img-3 {
   img {
     grid-column: span 4;
+    @media screen and (max-width: 480px) {
+      grid-column: 1 / span 12;
+    }
   }
 }
 .credits {
+  gap: var(--spacing);
   h3 {
+    grid-column: span 1;
     font-size: responsive 20px 24px;
     font-variation-settings: "wght" 500;
+  }
+  div {
+    position: relative;
+    top: 2px;
+    grid-column: span 5;
+  }
+  @media screen and (max-width: 768px) {
+    h3 {
+      grid-column: span 2;
+    }
+    div {
+      grid-column: span 10;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    h3 {
+      grid-column: span 4;
+    }
+    div {
+      grid-column: span 8;
+    }
   }
 }
 </style>

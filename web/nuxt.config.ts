@@ -15,6 +15,7 @@ export default defineNuxtConfig({
     },
   },
   modules: ["@nuxtjs/sanity"],
+
   sanity: {
     projectId: "bra9n7be",
     dataset: "production",
