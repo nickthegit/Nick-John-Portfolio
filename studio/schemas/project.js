@@ -54,13 +54,15 @@ export default {
       title: "Feature Video",
       type: "url",
       description: "if applicable: vimeo link eg: https://vimeo.com/98759847",
+      // hide
+      hidden: true,
     },
     {
       name: "video",
       title: "Video",
       type: "string",
       description:
-        "from cloudinary, (login: nj github). In folder: https://console.cloudinary.com/console/c-958983b33b0ac176e6e09c230d5b7a/media_library/folders/c3878febdb094e86d17ec72d3fd9a0c78d <--make sure it'sin this folder!!. String should just be the name such as renew_labs_walkthrough_01_1080p_qgagzl",
+        "from cloudinary, (login: nj github). Complete URL eg: https://res.cloudinary.com/dxyssyktz/video/upload/f_auto,q_auto:goodv1679586126/nj-portfolio/renew_labs.mp4",
     },
     {
       name: "body",

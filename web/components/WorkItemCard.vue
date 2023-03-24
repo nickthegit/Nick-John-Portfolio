@@ -1,6 +1,5 @@
 <template>
   <article class="wrapper grid-12">
-    <!-- <div class="dummy-img" ref="dummyImg"></div> -->
     <div class="img-wrapper" ref="imgWrapper">
       <img :src="imgSrc" />
     </div>
@@ -51,12 +50,9 @@ nextTick(() => {
 </script>
 
 <style lang="scss" scoped>
-.dummy-img {
-  grid-column: 6 / 13;
-  grid-row: 1 / 1;
-  z-index: 2;
-  position: relative;
-  background: rebeccapurple;
+article {
+  gap: var(--spacing);
+  grid-template-rows: auto auto;
 }
 .img-wrapper {
   grid-column: 4 / 13;
@@ -67,6 +63,9 @@ nextTick(() => {
   transition: transform 0.3s ease-in-out;
   height: 0;
   padding-bottom: calc((9 / 16) * 100%);
+  @media screen and (max-width: 480px) {
+    grid-column: 1 / 13;
+  }
 }
 img {
   width: 100%;
@@ -84,7 +83,12 @@ img {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 30px;
+  gap: var(--spacing);
+  @media screen and (max-width: 480px) {
+    grid-column: 1 / 13;
+    grid-row: 2 / 3;
+    grid-template-rows: auto auto;
+  }
 }
 hgroup {
   text-transform: uppercase;

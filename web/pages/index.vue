@@ -2,13 +2,13 @@
   <div>
     <section class="work-items-wrapper">
       <ul>
-        <li v-for="item in workItems" :key="item.id">
-          <NuxtLink :to="`/work/${item.slug}`">
+        <li v-for="project in projects" :key="project._id">
+          <NuxtLink :to="`/work/${project.slug}`">
             <WorkItemCard
-              :title="item.title"
-              :img-src="item.imgSrc"
-              :client="item.client"
-              :slug="item.slug"
+              :title="project.title"
+              :img-src="$urlFor(project.mainImage).width(1426).url()"
+              :client="project.client"
+              :slug="project.slug"
             />
           </NuxtLink>
         </li>
@@ -84,6 +84,24 @@ const workItems = [
     imgSrc: "https://via.placeholder.com/600x400/72f2f2/969696",
   },
 ];
+
+const homeQuery = groq`
+*[_type == "homePage" ][0] {
+  projects[]-> {
+    _id,
+    "slug": slug.current,
+    title,
+    mainImage,
+    client
+  }
+}
+`;
+
+const { data, refresh } = await useSanityQuery(homeQuery);
+
+const { projects } = data.value;
+
+// console.log(projects);
 </script>
 
 <style lang="scss" scoped>
@@ -91,12 +109,6 @@ ul {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 180px;
-  @media screen and (max-width: 768px) {
-    gap: 100px;
-  }
-  @media screen and (max-width: 480px) {
-    gap: 80px;
-  }
+  gap: var(--card-spacing);
 }
 </style>

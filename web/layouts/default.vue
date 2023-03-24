@@ -6,13 +6,7 @@
 
 <style lang="scss" scoped>
 div {
-  padding-top: 200px;
+  padding-top: var(--card-spacing);
   min-height: 60vh;
-  @media screen and (max-width: 768px) {
-    padding-top: 140px;
-  }
-  @media screen and (max-width: 480px) {
-    padding-top: 120px;
-  }
 }
 </style>

@@ -2,11 +2,11 @@
   <article>
     <WorkItemCard
       :title="title"
-      :img-src="test"
+      :img-src="$urlFor(mainImage).width(1426).url()"
       :client="client"
       :slug="slug"
       :tags="categories"
-      :site-link="link"
+      :site-link="link ? link : ''"
     />
     <!-- intro -->
     <section v-if="body" class="text-container intro wrapper grid-12">
@@ -16,7 +16,7 @@
     <section v-if="video" class="media-container video-wrapper wrapper grid-12">
       <div class="video">
         <video
-          :src="`https://res.cloudinary.com/dxyssyktz/video/upload/f_auto,q_auto:good/v1679586126/nj-portfolio/${video}.mp4`"
+          :src="video"
           controls
           muted
           loop
@@ -27,21 +27,17 @@
         ></video>
       </div>
     </section>
-    <section class="media-container img-2 wrapper grid-12">
-      <img
-        :src="`https://res.cloudinary.com/dxyssyktz/video/upload/f_auto,q_auto:good/v1679586126/nj-portfolio/${video}.jpg`"
-      />
-    </section>
     <!-- images -->
-    <section class="media-container img-2 wrapper grid-12">
-      <img src="https://via.placeholder.com/600x400" />
-      <img src="https://via.placeholder.com/400x300" />
-      <img src="https://via.placeholder.com/400x300" />
-      <img src="https://via.placeholder.com/400x300" />
+    <section v-if="images" class="media-container img-2 wrapper grid-12">
+      <img
+        v-for="image in images"
+        :key="image._key"
+        :src="$urlFor(image).width(800).url()"
+      />
     </section>
 
     <!-- credits -->
-    <cite class="text-container credits wrapper grid-12">
+    <cite v-if="credits" class="text-container credits wrapper grid-12">
       <h3>CREDITS:</h3>
       <div class="wysiwyg">
         <SanityContent :blocks="credits" />
@@ -51,38 +47,31 @@
 </template>
 
 <script setup>
+const { $urlFor } = useNuxtApp();
 // get slug from route in nuxt 3
-const { params } = useRoute();
+const { params } = await useRoute();
 
 const query = groq`
-*[_type == "project" && slug.current == 'converse-renew-labs-store'][0] {
+*[_type == "project" && slug.current == '${params.slug}'][0] {
     _id,
-    "title": coalesce(title, false),
+    "title": coalesce(title, 'title needed'),
     "body": coalesce(body, false),
     "images": coalesce(images.images, false),
     "credits": coalesce(credits, false),
-    "link": coalesce(link, false),
+    "link": coalesce(link, ''),
     "featuredVideo": coalesce(featuredVideo, false), 
     "video": coalesce(video, false),
-    "mainImage": coalesce(mainImage, false),
+    "mainImage": coalesce(mainImage, ''),
     "categories": coalesce(categories[]->{
       _id,
       title
     }, false),
     "slug": coalesce(slug.current, false),
-    "client": coalesce(client, false),
+    "client": coalesce(client, ''),
 }
 `;
 
-console.log("query", query);
-
-const { data, refresh } = await useSanityQuery(query, {
-  params: {
-    slug: params.slug,
-  },
-});
-
-const slugData = data.value;
+const { data, refresh } = await useSanityQuery(query);
 const {
   title,
   body,
@@ -97,14 +86,7 @@ const {
   video,
 } = data.value;
 
-console.log("YOYOYOYO", video);
-
-console.log("data", slugData.title);
-
-const { $urlFor } = useNuxtApp();
-
-const test = $urlFor(slugData.mainImage).width(1426).url();
-console.log("test", test);
+// console.log("YOYOYOYO", images);
 </script>
 
 <style lang="scss">
@@ -145,7 +127,7 @@ console.log("test", test);
     height: 0;
     overflow: hidden;
     padding-bottom: 56.25%;
-    grid-column: 5 / span 8;
+    grid-column: 1 / span 12;
     background: black;
     @media screen and (max-width: 768px) {
       grid-column: 1 / span 12;

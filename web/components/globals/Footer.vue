@@ -37,6 +37,9 @@ footer {
   width: 100%;
   padding-top: 20px;
   padding-bottom: 20px;
+  background: var(--color-foreground);
+  color: var(--color-background);
+  margin-top: var(--card-spacing);
 }
 .footer-socials {
   display: flex;

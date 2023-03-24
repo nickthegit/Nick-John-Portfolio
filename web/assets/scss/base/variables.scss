@@ -3,18 +3,22 @@
   --color-secondary: #fff;
   --color-foreground: #000;
   --color-background: #fff;
+  //
   --spacing: 40px;
   --content-spacing: 80px;
+  --card-spacing: 180px;
 }
 @media screen and (max-width: 768px) {
   :root {
     --spacing: 20px;
     --content-spacing: 60px;
+    --card-spacing: 120px;
   }
 }
 @media screen and (max-width: 480px) {
   :root {
     --spacing: 20px;
     --content-spacing: 40px;
+    --card-spacing: 100px;
   }
 }
