@@ -1,5 +1,7 @@
 <template>
   <article class="wrapper grid-12">
+    <div class="long-width-box" ref="longWidthBox"></div>
+    <div class="short-width-box" ref="shortWidthBox"></div>
     <div class="img-wrapper" ref="imgWrapper">
       <HeroImage :img="imgSrc" :alt-text="`${title} - Feature image`" />
     </div>
@@ -44,17 +46,30 @@ const showInfo = computed(() => {
   return props.tags.length > 0 || props.siteLink.length > 0 ? true : false;
 });
 
-const dummyImg = ref(null);
-const imgWrapper = ref(null);
-let shortWidth = ref(0);
-let longWidth = ref("100%");
+const shortWidthBox = await ref(null);
+const longWidthBox = await ref(null);
+const imgWrapper = await ref(null);
 
-// onMounted(() => {});
-nextTick(() => {
-  // shortWidth = dummyImg.value.clientWidth;
-  // longWidth = imgWrapper.value.clientWidth;
-  // console.log(shortWidth, longWidth);
-  // dummyImg.value.style.width = `${imgWrapper.value.clientWidth}px`;
+const hero = computed(() => {
+  return props.isHero;
+});
+
+watch(hero, async (newSWB, oldSWB) => {
+  nextTick(() => {
+    changeImgWidth();
+  });
+});
+
+const changeImgWidth = () => {
+  if (hero.value) {
+    imgWrapper.value.style.width = shortWidthBox.value.offsetWidth + "px";
+  } else {
+    imgWrapper.value.style.width = longWidthBox.value.offsetWidth + "px";
+  }
+};
+
+onMounted(() => {
+  changeImgWidth();
 });
 </script>
 
@@ -63,11 +78,29 @@ article {
   gap: var(--spacing);
   grid-template-rows: auto auto;
 }
+.long-width-box,
+.short-width-box {
+  width: 100%;
+  position: relative;
+  z-index: 9999;
+  grid-row: 1 / 1;
+  @media screen and (max-width: 480px) {
+    grid-column: 1 / 13 !important;
+  }
+}
+.long-width-box {
+  grid-column: 4 / 13;
+}
+.short-width-box {
+  grid-column: 5 / 13;
+}
 .img-wrapper {
+  width: 100%;
   grid-column: 4 / 13;
   grid-row: 1 / 1;
   z-index: 1;
-  transition: transform 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  justify-self: end;
   @media screen and (max-width: 480px) {
     grid-column: 1 / 13;
   }

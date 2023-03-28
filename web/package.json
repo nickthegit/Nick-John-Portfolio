@@ -12,8 +12,11 @@
   },
   "dependencies": {
     "@nuxtjs/sanity": "^1.6.0",
+    "@pinia/nuxt": "^0.4.7",
     "@sanity/image-url": "^1.0.2",
+    "@studio-freight/lenis": "^1.0.4",
     "headroom.js": "^0.12.0",
+    "pinia": "^2.0.33",
     "postcss-responsive-type": "^1.0.0",
     "sass": "^1.59.3"
   }

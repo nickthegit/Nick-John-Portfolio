@@ -93,6 +93,7 @@ div {
   height: 0;
   position: relative;
   overflow: hidden;
+  border-radius: 10px;
   padding-bottom: calc((9 / 16) * 100%);
   @media screen and (max-width: 768px) {
     padding-bottom: calc((2 / 3) * 100%);

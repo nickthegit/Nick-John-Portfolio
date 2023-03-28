@@ -94,6 +94,7 @@ div {
   position: relative;
   overflow: hidden;
   padding-bottom: calc((9 / 16) * 100%);
+  border-radius: 10px;
   @media screen and (max-width: 768px) {
     padding-bottom: calc((2 / 3) * 100%);
   }

@@ -1,9 +1,7 @@
 <template>
   <div>
     <GlobalsHeader />
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
+    <NuxtLayout> </NuxtLayout>
     <GlobalsFooter />
   </div>
 </template>

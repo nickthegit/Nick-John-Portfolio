@@ -14,7 +14,7 @@ export default defineNuxtConfig({
       "postcss-responsive-type": {},
     },
   },
-  modules: ["@nuxtjs/sanity"],
+  modules: ["@nuxtjs/sanity", "@pinia/nuxt"],
 
   sanity: {
     projectId: "bra9n7be",
