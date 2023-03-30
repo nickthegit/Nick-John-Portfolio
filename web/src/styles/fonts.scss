@@ -1,0 +1,61 @@
+@font-face {
+  font-family: "CabinetGrotesk-Variable";
+  src: url("../fonts/Cabinet Grotesk/Fonts/WEB/fonts/CabinetGrotesk-Variable.woff2")
+      format("woff2"),
+    url("../fonts/Cabinet Grotesk/Fonts/WEB/fonts/CabinetGrotesk-Variable.woff")
+      format("woff"),
+    url("../fonts/Cabinet Grotesk/Fonts/WEB/fonts/CabinetGrotesk-Variable.ttf")
+      format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Figue";
+  src: url("../fonts/Figue/Figue-Regular.woff2") format("woff2"),
+    url("../fonts/Figue/Figue-Regular.woff") format("woff"),
+    url("../fonts/Figue/Figue-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: "CabinetGrotesk-Variable", sans-serif;
+  font-variation-settings: "wght" 400;
+}
+
+h1,
+h2,
+h3 {
+  // font-family: "Figue", serif;
+}
+
+// p,
+// ul {
+//   font-size: responsive 16px 20px;
+// }
+
+.text-brand {
+  font-family: "CabinetGrotesk-Variable", sans-serif;
+  font-variation-settings: "wght" 600;
+  text-transform: uppercase;
+  font-size: responsive 16px 28px;
+  line-height: responsive 17px 29px;
+}
+.text-nav {
+  font-size: responsive 16px 24px;
+  line-height: responsive 16px 24px;
+}
+.text-jumbo {
+  font-family: "Figue", serif;
+  text-transform: uppercase;
+  font-size: responsive 42px 92px;
+  line-height: responsive 42px 92px;
+}

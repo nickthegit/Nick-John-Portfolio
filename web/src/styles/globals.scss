@@ -1,0 +1,10 @@
+body {
+}
+
+.wrapper {
+  @apply w-full max-w-[1440px] mx-auto px-10 md:px-8 sm:px-6;
+}
+
+.grid-12 {
+  @apply grid grid-cols-12 gap-x-10 md:gap-x-8 sm:gap-x-6;
+}
