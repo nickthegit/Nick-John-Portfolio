@@ -1,33 +1,35 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
-import Link from "next/link";
+import ProjectCard from "./ProjectCard";
+
+import Lenis from "@studio-freight/lenis";
 
 export default function Projects({ projects }) {
+  const sectionRef = useRef(null);
+  const ulRef = useRef(null);
+
   return (
-    <section className="relative h-auto w-full overflow-x-scroll">
-      <ul className="relative overflow-x-scroll inline whitespace-nowrap">
+    <section
+      className="relative w-full h-auto overflow-y-visible"
+      ref={sectionRef}
+    >
+      {/* <ul
+        className="relative inline overflow-y-visible whitespace-nowrap"
+        ref={ulRef}
+      >
         {projects.map((project, index) => (
           <li
             key={project._id}
-            className={`w-[720px] bg-red-200 inline-block ml-8 ${
+            className={`lis inline-block ml-8 ${
               index + 1 == projects.length ? "mr-96" : "mr-20"
             }`}
           >
-            <Link href={`/work/${project.slug}`}>
-              <img
-                src="https://via.placeholder.com/300x400"
-                alt=""
-                className="w-[720px] h-[540px] object-cover"
-              />
-              <h2>
-                {project.title} {index + 1} / {projects.length}
-              </h2>
-            </Link>
+            <ProjectCard project={project} />
           </li>
         ))}
-      </ul>
+      </ul> */}
     </section>
   );
 }

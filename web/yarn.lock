@@ -1103,6 +1103,11 @@
     base64url "^3.0.1"
     tslib "^2.3.1"
 
+"@studio-freight/lenis@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@studio-freight/lenis/-/lenis-1.0.6.tgz#d22494bc1c137ba0854398d251a6c871a18a529b"
+  integrity sha512-g/cTDwra/6WsCGK6KTyfOlTAwJA5xFCJtRFNGM+Ge/oIOg2emLJKV+yTFATekjuCX4r7W5tcBp8LcQ2b+P6yuQ==
+
 "@swc/helpers@0.4.14":
   version "0.4.14"
   resolved "https://registry.yarnpkg.com/@swc/helpers/-/helpers-0.4.14.tgz#1352ac6d95e3617ccb7c1498ff019654f1e12a74"
@@ -2727,6 +2732,15 @@ fraction.js@^4.2.0:
   resolved "https://registry.yarnpkg.com/fraction.js/-/fraction.js-4.2.0.tgz#448e5109a313a3527f5a3ab2119ec4cf0e0e2950"
   integrity sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA==
 
+framer-motion@^10.10.0:
+  version "10.10.0"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-10.10.0.tgz#929f3d3ca653af9885e162a979fc941acfa2ce7a"
+  integrity sha512-eCsyOcJimIRbx9KOzBTO3j9u1rF/H8/o/ybizYqdrzHkEeHx9L2NcEfGWfV0OHTc1JV17ECVzuZpomupEJ4+dw==
+  dependencies:
+    tslib "^2.4.0"
+  optionalDependencies:
+    "@emotion/is-prop-valid" "^0.8.2"
+
 framer-motion@^6.3.0:
   version "6.5.1"
   resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-6.5.1.tgz#802448a16a6eb764124bf36d8cbdfa6dd6b931a7"
@@ -3044,6 +3058,11 @@ groq@3:
   version "3.8.0"
   resolved "https://registry.yarnpkg.com/groq/-/groq-3.8.0.tgz#d20f0de861d4a2ce322202e6b564d4302e64e087"
   integrity sha512-84xIN6MkjlB8jNQOdBdRv2jUQZDqriY3SqidcVTtw2/1//9mMwH1Dec2vd3iSsxl/WPh9yqbgTm3zFZYiZexeA==
+
+gsap@^3.11.5:
+  version "3.11.5"
+  resolved "https://registry.yarnpkg.com/gsap/-/gsap-3.11.5.tgz#97ef65091f43868be387803f9db277e8cd5bd041"
+  integrity sha512-Q89nKCLgoX5xUjznh9LcaIUkz54k1voNucT1Rpf9SJNFIQznBwFqt5qUUQbeVInFyN/n18OUJkpeI6CNEDt74w==
 
 gunzip-maybe@^1.4.1:
   version "1.4.2"

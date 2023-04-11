@@ -10,16 +10,24 @@
   font-display: swap;
   font-style: normal;
 }
-
 @font-face {
-  font-family: "Figue";
-  src: url("../fonts/Figue/Figue-Regular.woff2") format("woff2"),
-    url("../fonts/Figue/Figue-Regular.woff") format("woff"),
-    url("../fonts/Figue/Figue-Regular.ttf") format("truetype");
+  font-family: "Recoleta DEMO";
+  src: url("../fonts/Recoleta/Recoleta-RegularDEMO.woff2") format("woff2"),
+    url("../fonts/Recoleta/Recoleta-RegularDEMO.woff") format("woff");
   font-weight: normal;
   font-style: normal;
-  font-display: block;
+  font-display: swap;
 }
+
+// @font-face {
+//   font-family: "Figue";
+//   src: url("../fonts/Figue/Figue-Regular.woff2") format("woff2"),
+//     url("../fonts/Figue/Figue-Regular.woff") format("woff"),
+//     url("../fonts/Figue/Figue-Regular.ttf") format("truetype");
+//   font-weight: normal;
+//   font-style: normal;
+//   font-display: block;
+// }
 
 * {
   -webkit-font-smoothing: antialiased;
@@ -54,8 +62,20 @@ h3 {
   line-height: responsive 16px 24px;
 }
 .text-jumbo {
-  font-family: "Figue", serif;
-  text-transform: uppercase;
-  font-size: responsive 42px 92px;
-  line-height: responsive 42px 92px;
+  font-family: "Recoleta DEMO", serif;
+  // text-transform: uppercase;
+  font-size: responsive 22px 144px;
+  line-height: responsive 22px 144px;
+}
+
+.text-footer-socials {
+  font-family: "Recoleta DEMO", serif;
+  font-size: responsive 20px 36px;
+  line-height: responsive 20px 36px;
+}
+
+.text-card-title {
+  font-family: "Recoleta DEMO", serif;
+  font-size: responsive 20px 36px;
+  line-height: responsive 20px 36px;
 }
